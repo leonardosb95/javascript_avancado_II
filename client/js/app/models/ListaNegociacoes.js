@@ -1,14 +1,12 @@
 class ListaNegociacoes {
 
-    constructor(armadilha) {
+    constructor() {
 
         this._negociacoes=[];
-        this._armadilha=armadilha;
     }
 
     adiciona(negociacao){
         this._negociacoes.push(negociacao);
-        this._armadilha(this);// A própia instância que esta sendo chamada, o metodo adiciona
     }
 
 
@@ -21,7 +19,6 @@ class ListaNegociacoes {
     esvazia(){
 
         this._negociacoes=[];
-        this._armadilha(this);// A própia instância que esta sendo chamada, o metodo esvazia
     }
 
 }
