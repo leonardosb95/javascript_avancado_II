@@ -11,8 +11,9 @@ class ProxyFactory {
                     return function () {
 
                         console.log(`interceptando ${prop}`);
-                        Reflect.apply(target[prop], target, arguments);//retorna o valor da propriedade, a referência ao Objeto e coloca os argumentos da propriedade
-                        return acao(target);
+                        let retorno=Reflect.apply(target[prop], target, arguments);//retorna o valor da propriedade, a referência ao Objeto e coloca os argumentos da propriedade
+                         acao(target);
+                         return retorno;
 
                     }
                 }
