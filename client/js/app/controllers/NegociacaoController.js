@@ -32,30 +32,19 @@ class NegociacaoController {
     }
 
     importaNegociacoes() {
+        let service= new NegociacoesServices();
 
-        let xhr = new XMLHttpRequest();
+        service.obterNegociacoesDaSemana((erro,negociacoes)=>{
+            if (erro) {
+                this.mensagem.texto=erro;
+                return;
+            } 
+          negociacoes.forEach(negociacao =>this._listaNegociacoes.adiciona(negociacao));
+          this.mensagem.texto='Importado com sucesso a lista de negociacoes';
 
-        xhr.open('GET', 'negociacoes/semana');
 
-        xhr.onreadystatechange = () => {
-
-            if (xhr.readyState == 4) {
-
-                if (xhr.status == 200) {
-                    JSON.parse(xhr.responseText)//Converte o texto para Objeto
-                        .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))//Cria uma nova lista
-                        .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));//Percorre a lista e chama o metodo adiciona
-                        this.mensagem.texto = 'Negociacoes importadas com sucesso!!';
-
-                } else {
-                    console.log(xhr.responseText);
-                    this.mensagem.texto = 'Não foi possivel importar as negociacoes';
-                }
-
-            }
-        };
-
-        xhr.send();
+        });
+      
 
     }
 
