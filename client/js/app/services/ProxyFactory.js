@@ -6,10 +6,9 @@ class ProxyFactory {
         return new Proxy(objeto, {
 
             get(target, prop, receiver) {
-                if (props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {//Verifica se a propriedade do Objeto e adiciona ou esvazia
 
+                if(props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {//Verifica se a propriedade do Objeto e adiciona ou esvazia
                     return function () {
-
                         console.log(`interceptando ${prop}`);
                         let retorno=Reflect.apply(target[prop], target, arguments);//retorna o valor da propriedade, a referência ao Objeto e coloca os argumentos da propriedade
                          acao(target);
